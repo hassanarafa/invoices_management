@@ -1,83 +1,50 @@
 <template>
   <aside class="sidebar">
-    <div class="user-info">
-      <img src="@/assets/profile-placeholder.png" alt="User" class="avatar" />
-      <div class="details">
-        <p class="name">Jamaal Koko</p>
-        <p class="email">info@jamaal-koko.com</p>
-      </div>
-    </div>
-
-    <nav class="nav-menu">
-      <router-link to="/" class="nav-item">🏠 Dashboard</router-link>
-      <router-link to="/customers" class="nav-item">👥 Customers</router-link>
-      <router-link to="/invoices" class="nav-item">🧾 Invoices</router-link>
-      <router-link to="/setup" class="nav-item">⚙️ Setup</router-link>
+    <div class="logo">🚀</div>
+    <nav>
+      <router-link to="/" exact>
+        <span>🏠</span>
+      </router-link>
+      <router-link to="/analytics">
+        <span>📊</span>
+      </router-link>
+      <router-link to="/settings">
+        <span>⚙️</span>
+      </router-link>
     </nav>
   </aside>
 </template>
 
-<script>
-export default {}
-</script>
-
 <style scoped>
 .sidebar {
-  width: 240px;
-  background-color: #ffffff;
-  height: 100vh;
-  padding: 1rem;
-  border-right: 1px solid #e5e7eb;
+  width: 64px;
+  background-color: #1f2937;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-}
-
-.user-info {
-  display: flex;
   align-items: center;
-  gap: 0.75rem;
+  padding: 1rem 0;
 }
 
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  background-color: #e5e7eb;
+.logo {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: white;
 }
 
-.details {
+nav {
   display: flex;
   flex-direction: column;
-  font-size: 0.9rem;
+  gap: 1.5rem;
 }
 
-.name {
-  font-weight: 600;
-}
-
-.email {
-  font-size: 0.8rem;
-  color: #6b7280;
-}
-
-.nav-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.nav-item {
+nav a {
+  color: #9ca3af;
+  font-size: 1.5rem;
   text-decoration: none;
-  font-weight: 500;
-  color: #374151;
-  padding: 0.5rem;
-  border-radius: 6px;
-  transition: background-color 0.2s;
+  transition: color 0.3s;
 }
 
-.nav-item:hover,
-.router-link-exact-active {
-  background-color: #f3f4f6;
+nav a.router-link-active {
+  color: #ffffff;
 }
 </style>

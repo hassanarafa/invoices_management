@@ -1,206 +1,143 @@
 <template>
-  <div class="dashboard-wrapper">
+  <div class="layout">
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
         <img src="@/assets/logo.webp" alt="Logo" class="logo" />
         <h2>My App</h2>
       </div>
-      <ul class="menu">
-        <router-link to="/home" class="menu-item" active-class="active">
-          <li>Dashboard</li>
-        </router-link>
-        <router-link to="/customers" class="menu-item" active-class="active">
-          <li>Customers</li>
-        </router-link>
-        <router-link to="/invoices" class="menu-item" active-class="active">
-          <li>Invoices</li>
-        </router-link>
-        <router-link to="/setup" class="menu-item" active-class="active">
-          <li>Setup</li>
-        </router-link>
-      </ul>
+
+      <nav class="nav">
+        <router-link to="/home" class="nav-link" active-class="active">Dashboard</router-link>
+        <router-link to="/customers" class="nav-link" active-class="active">Customers</router-link>
+        <router-link to="/invoices" class="nav-link" active-class="active">Invoices</router-link>
+        <router-link to="/setup" class="nav-link" active-class="active">Setup</router-link>
+      </nav>
     </aside>
 
-    <!-- Main Content -->
-    <div class="main-content">
+    <!-- Main content area -->
+    <div class="main">
       <!-- Topbar -->
       <header class="topbar">
-        <input type="text" placeholder="Search..." class="search-bar" />
+        <input type="text" placeholder="Search..." class="search" />
         <div class="topbar-actions">
           <button class="icon-button">⚙️</button>
           <button class="icon-button">🔔</button>
         </div>
       </header>
 
-      <section class="dashboard-body">
+      <!-- Page Content -->
+      <main class="content">
         <router-view />
-      </section>
+      </main>
     </div>
   </div>
 </template>
 
 <style scoped>
-.dashboard-wrapper {
+/* Layout Base */
+.layout {
   display: flex;
   height: 100vh;
   font-family: 'Segoe UI', sans-serif;
 }
 
+/* Sidebar */
 .sidebar {
-  width: 240px;
-  background: #2e3a59;
-  color: #fff;
-  padding: 1rem;
+  width: 250px;
+  background-color: #1e2a45;
+  color: white;
   display: flex;
   flex-direction: column;
+  padding: 1.5rem;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .sidebar-header .logo {
-  width: 50px;
+  height: 60px;
   margin-bottom: 0.5rem;
 }
 
-.menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu li {
-  padding: 0.75rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.menu li.active, .menu li:hover {
-  background: #1d253b;
-  border-radius: 8px;
-}
-
-.menu-item .active {
-  background: #1d253b;
-  border-radius: 8px;
-}
-
-.main-content {
-  flex: 1;
-  background: #f5f6fa;
+.nav {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
+.nav-link {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  color: #e4e7ec;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #314162;
+  color: #fff;
+}
+
+/* Main Area */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f6f8;
+}
+
+/* Topbar */
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
   padding: 1rem 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-.search-bar {
-  width: 300px;
-  padding: 0.5rem;
-  border-radius: 8px;
+.search {
+  padding: 0.5rem 1rem;
   border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 1rem;
 }
 
 .icon-button {
   background: none;
   border: none;
   font-size: 1.2rem;
-  margin-left: 1rem;
   cursor: pointer;
 }
 
-.dashboard-body {
+/* Content */
+.content {
   padding: 2rem;
   overflow-y: auto;
+  height: 100%;
 }
 
-.cards-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.card {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.alert progress {
-  width: 100%;
-  height: 10px;
-  border-radius: 8px;
-  background: #eee;
-  accent-color: red;
-  margin: 1rem 0;
-}
-
-.overview .status-bar div {
-  margin: 0.5rem 0;
-}
-
-.overview .unpaid {
-  color: red;
-  font-weight: bold;
-}
-
-.overview .paid {
-  color: green;
-  font-weight: bold;
-}
-
-.summary-grid {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.summary-card {
-  flex: 1;
-  padding: 1rem;
-  border-radius: 10px;
-  text-align: center;
-  background: #fff;
-  font-weight: 500;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.summary-card.warning {
-  border-left: 4px solid orange;
-}
-
-.summary-card.danger {
-  border-left: 4px solid crimson;
-}
-
-.summary-card.success {
-  border-left: 4px solid green;
-}
-
+/* Responsive */
 @media (max-width: 768px) {
   .sidebar {
     display: none;
   }
 
-  .main-content {
+  .main {
     width: 100%;
   }
 
-  .summary-grid {
-    flex-direction: column;
-  }
-
-  .search-bar {
+  .search {
     width: 100%;
   }
 }

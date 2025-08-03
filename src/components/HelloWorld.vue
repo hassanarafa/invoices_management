@@ -1,58 +1,186 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="login-wrapper">
+    <div class="login-container">
+      <div class="login-left">
+        <h2 class="login-title">Welcome Back</h2>
+
+        <form @submit.prevent="handleSubmit" class="login-form">
+          <input
+              v-model="username"
+              type="text"
+              placeholder="Username"
+              class="login-input"
+          />
+
+          <input
+              v-model="password"
+              type="password"
+              placeholder="Password"
+              class="login-input"
+          />
+
+          <div class="login-options">
+            <label class="remember-me">
+              <input type="checkbox" /> Remember Me
+            </label>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-button">Sign In</button>
+        </form>
+      </div>
+
+      <div class="login-right">
+        <img src="@/assets/logo.webp" alt="Login Illustration" />
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+<script setup>
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+
+const router = useRouter()
+const username = ref('')
+const password = ref('')
+
+function handleSubmit() {
+  // Simulate login
+  router.push('/home')
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.login-wrapper {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.login-container {
+  display: flex;
+  flex-direction: row; /* logo left by default */
+  width: 100%;
+  max-width: 960px;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.login-left {
+  flex: 1;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-a {
-  color: #42b983;
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.login-input {
+  padding: 0.85rem 1.2rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.login-input:focus {
+  border-color: #475569;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  outline: none;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.forgot-password {
+  color: #475569;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.forgot-password:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.login-button {
+  background-color: #475569;
+  color: white;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-right {
+  flex: 1;
+  background: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-right img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .login-container {
+    flex-direction: column; /* stack: logo on top */
+  }
+
+  .login-right {
+    order: -1; /* move logo section above form */
+    padding: 1.5rem;
+  }
+
+  .login-right img {
+    max-width: 160px;
+    margin: 0 auto;
+    border-radius: 1rem;
+  }
+
+  .login-left {
+    padding: 1.5rem 1rem;
+  }
 }
 </style>
